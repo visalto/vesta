@@ -1,0 +1,18 @@
+# Misc root level files
+.env
+.git
+.gitignore
+.gitmodules
+.idea
+.vestaignore
+*.py
+*.md
+
+# visalto client is not part of the
+# docker stack
+visalto-client
+
+# Service from util that will be
+# started only on-demand
+util-services/pg-admin
+util-services/portainer
