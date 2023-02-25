@@ -1,5 +1,5 @@
-<p style="font-size: 40px; font-weight: bold">VESTA</p>
-<p style="font-size: 16px; margin-top:-30px; margin-left:4px">Made by Visalto</p>
+# Vesta 
+
 Vesta is open source data engineering platform with pre included batteries 
 such as
 
