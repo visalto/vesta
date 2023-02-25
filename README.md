@@ -36,9 +36,9 @@ and over again just slightly different
 
 Goal for Vesta is to provide a true end-to-end data engineering platform that is open-sourced,
 delivers boost of productivity and creativity for engineers and the
-setup process (assuming docker engine is configured) of base can be achieved
+setup process (assuming docker engine is configured) of out of the box platform can be achieved
 in minutes
 
 Finally we want to say THANK YOU to entire open source community and making this 
-project open sourced is very important for us because without the community vesta 
+project open sourced is very important for us because without the community Vesta 
 would not exist! Thank you and please contribute to the Vesta project #todo: add open source contribution guidelines
