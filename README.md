@@ -2,8 +2,9 @@
 <p style="font-size: 16px; margin-top:-30px; margin-left:4px">Made by Visalto</p>
 Vesta is open source data engineering platform with pre included batteries 
 such as
-1) Deploying and Executing pipelines ( engine bas on Airflow w/ Celery Executors technology)
-2) code/dev environment(codercom/code-server docker stack)
+
+1) Deploying and Executing pipelines (engine based on Airflow w/ Celery Executors technology)
+2) code/dev environment(based on codercom/code-server docker image)
 3) Web platform for performing ad hoc analysis and interacting with the rest of the components (Django)
      - User and permission management 
      - Workspace management 
