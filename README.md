@@ -11,8 +11,9 @@ such as
      - Pipeline status monitoring and deployment
      - Platform API 
 4) Git version management server (Gitea)
-5) Dataset Storage (parquet datasets stored in container that can be mapped to desired disk location, on vm or attached)
-6) Data / repo lineage (OpenLineage framework -> Marquez Docker)
+5) Custom CI/CD internal engine (FastAPI)
+6) Dataset Storage (parquet datasets stored in container that can be mapped to desired disk location, on vm or attached)
+7) Data / repo lineage (OpenLineage framework -> Marquez Docker)
 
 
 **Note:** Platform is designed such that each instance of Vesta can be customized with additional docker
