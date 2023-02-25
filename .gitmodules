@@ -1,0 +1,3 @@
+[submodule "visalto-client"]
+	path = visalto-client
+	url = https://github.com/visalto/visalto-client.git
