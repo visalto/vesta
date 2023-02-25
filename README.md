@@ -39,6 +39,15 @@ delivers boost of productivity and creativity for engineers and the
 setup process (assuming docker engine is configured) of out of the box platform can be achieved
 in minutes
 
-Finally we want to say THANK YOU to entire open source community and making this 
+Finally, we want to say THANK YOU to entire open source community and making this 
 project open sourced is very important for us because without the community Vesta 
 would not exist! Thank you and please contribute to the Vesta project #todo: add open source contribution guidelines
+
+# Deployment and Setup
+I will add something more here when it is time 
+
+# Contact 
+I will add something more here when it is time 
+
+# References 
+I will add something more here when it is time 
