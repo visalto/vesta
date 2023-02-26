@@ -87,7 +87,7 @@ def _run_cmd(cmd: str, on_success_msg: str, on_error_msg: str) -> None:
 
 
 def show_service_logs(follow: bool) -> None:
-    docker_cmd = 'docker-compose logs'
+    docker_cmd = f'docker-compose --env-file {ENV_FILE.__str__()} logs'
     if follow:
         docker_cmd += ' -f'
     _run_cmd(docker_cmd, 'Logs Fetched', 'Error fetching logs')
