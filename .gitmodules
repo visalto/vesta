@@ -19,3 +19,6 @@
 [submodule "vesta-lineage"]
 	path = vesta-lineage
 	url = https://github.com/visalto/vesta-lineage.git
+[submodule "vesta-init"]
+	path = vesta-init
+	url = https://github.com/visalto/vesta-init.git
