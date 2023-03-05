@@ -1,5 +1,5 @@
 # Misc root level files
-.env
+*.env
 .git
 .gitignore
 .gitmodules
@@ -7,6 +7,8 @@
 .vestaignore
 *.py
 *.md
+# __platform__ is meant for platforms operations
+__platform__
 
 # visalto client is not part of the
 # docker stack
@@ -16,3 +18,4 @@ visalto-client
 # started only on-demand
 util-services/pg-admin
 util-services/portainer
+util-services/docker-manager

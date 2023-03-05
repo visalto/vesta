@@ -54,26 +54,37 @@ def fetch_list_of_services(services_as_string: bool = False) -> Union[List[Path]
 
 @click.command()
 @click.argument('service', type=str)
-@click.argument('mode', type=str)
+@click.option('--mode', type=str, default=None)
 @click.option('--build', default=False, is_flag=True, flag_value=True,
               help='Force to rebuild the image upon starting the containers')
 @click.option('-f', default=False, is_flag=True, flag_value=True,
               help='Follow logs output')
-def service_manager(service: str, mode: str, build: bool, f: bool):
-    MODE_ALLOWED_OPTIONS = ['start', 'stop', 'logs']
-    if mode not in MODE_ALLOWED_OPTIONS:
-        raise ValueError(f'Invalid mode options. Options: {tuple(MODE_ALLOWED_OPTIONS)}')
-    # change working directory to the service
-    os.chdir(BASE_DIR.joinpath(service))
-    is_start = mode == 'start'
-    is_stop = mode == 'stop'
-    is_logs = mode == 'logs'
-    if is_start:
-        start_service_docker_compose(service, build)
-    if is_stop:
-        stop_service_docker_compose(service)
-    if is_logs:
-        show_service_logs(f)
+@click.option('--branch', default=None, type=str)
+def service_manager(service: str, mode: str = None,
+                    build: bool = False, f: bool = False,
+                    branch: str = None):
+    is_service_present = service in fetch_list_of_services(True)
+    is_git_request = service == 'git'
+    if is_git_request:
+        from __platform__.vesta_mgmt_internal.checkout_new_branch import new_branch
+        new_branch(branch)
+    else:
+        is_addressing_platform = service == 'vesta'
+
+        MODE_ALLOWED_OPTIONS = ['start', 'stop', 'logs']
+        if mode not in MODE_ALLOWED_OPTIONS:
+            raise ValueError(f'Invalid mode options. Options: {tuple(MODE_ALLOWED_OPTIONS)}')
+        # change working directory to the service
+        os.chdir(BASE_DIR.joinpath(service))
+        is_start = mode == 'start'
+        is_stop = mode == 'stop'
+        is_logs = mode == 'logs'
+        if is_start:
+            start_service_docker_compose(service, build)
+        if is_stop:
+            stop_service_docker_compose(service)
+        if is_logs:
+            show_service_logs(f)
 
 
 def _run_cmd(cmd: str, on_success_msg: str, on_error_msg: str) -> None:

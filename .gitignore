@@ -3,3 +3,12 @@
 /venv/
 /env/
 .env
+
+/__platform__/workspaces/**
+!/__platform__/workspaces/**/*.md
+/__platform__/mnt/**
+!/__platform__/mnt/**/*.md
+/__platform__/dags/**
+!/__platform__/dags/**/*.md
+/__platform__/ide_shared_volume/**
+!/__platform__/ide_shared_volume/**/*.md
