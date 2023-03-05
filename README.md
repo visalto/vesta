@@ -68,4 +68,5 @@ I will add something more here when it is time
 1) scripts have to be executable otherwsie build failed 
      - Wonder if that has to be done by script or something else because git may not persist that 
 2) marquez does not support arm64 (sillicon chip) -> maybe build my own? 
-3) 10001 is a public facing port per mac mini pro m2
+3) Note that qemu is required to run on different distribution. since this is not intesive compute wise service, I will leave it 
+still question remains 
