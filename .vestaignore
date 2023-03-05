@@ -5,6 +5,9 @@
 .gitmodules
 .idea
 .vestaignore
+requirements.txt
+.vscode
+
 *.py
 *.md
 # __platform__ is meant for platforms operations
@@ -19,3 +22,4 @@ visalto-client
 util-services/pg-admin
 util-services/portainer
 util-services/docker-manager
+__platform__

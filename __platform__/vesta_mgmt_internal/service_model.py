@@ -170,8 +170,10 @@ if __name__ == '__main__':
     BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
     platform = Vesta(BASE_DIR)
-    platform.stop_services()
+    platform.start_services()
     # git_service = platform.service('vesta-git')
+    # lineage_service = platform.service('vesta-lineage')
+    # lineage_service.stop()
     # platform_web = platform.service('vesta-platform-core')
     # platform_web.start()
     # git_service.start()

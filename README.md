@@ -44,6 +44,18 @@ project open sourced is very important for us because without the community Vest
 would not exist! Thank you and please contribute to the Vesta project #todo: add open source contribution guidelines
 
 # Deployment and Setup
+To get started with your own vesta instance first 
+clone vesta git repostiry 
+```
+git clone https://github.com/visalto/vesta.git
+```
+
+Then open terminal and make sure you are in just cloned vesta repo
+```sh 
+git submodule update --remote --recursive --init && git submodule foreach --recursive git checkout <BRANCH_NAME>
+```
+todo: Add link to default vesta instance as well as any customized versions of it
+
 I will add something more here when it is time 
 
 # Contact 
@@ -51,3 +63,9 @@ I will add something more here when it is time
 
 # References 
 I will add something more here when it is time 
+
+# Notes during mac deployment 
+1) scripts have to be executable otherwsie build failed 
+     - Wonder if that has to be done by script or something else because git may not persist that 
+2) marquez does not support arm64 (sillicon chip) -> maybe build my own? 
+3) 10001 is a public facing port per mac mini pro m2

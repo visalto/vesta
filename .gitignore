@@ -12,3 +12,5 @@
 !/__platform__/dags/**/*.md
 /__platform__/ide_shared_volume/**
 !/__platform__/ide_shared_volume/**/*.md
+
+/.vscode/
