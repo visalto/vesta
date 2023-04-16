@@ -22,3 +22,6 @@
 [submodule "vesta-init"]
 	path = vesta-init
 	url = https://github.com/visalto/vesta-init.git
+[submodule "vesta-ide"]
+	path = vesta-ide
+	url = https://github.com/visalto/vesta-ide.git
