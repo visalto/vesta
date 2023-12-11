@@ -1,13 +1,16 @@
-import click
-import os
-from typing import Union, List
-from pathlib import Path
-import logging
-import fnmatch
-from __platform__.vesta_mgmt_internal.service_model import Vesta
 import argparse
+import fnmatch
+import logging
+import os
+from pathlib import Path
+from typing import List, Union
+
+import click
+
+from __platform__.vesta_mgmt_internal.service_model import Vesta
+
 logging.basicConfig(level='INFO')
-# todo: Automatically create external network if it doesnt exist 
+# todo: Automatically create external network if it doesnt exist
 
 logger = logging.getLogger(__name__)
 VESTA = 'vesta'

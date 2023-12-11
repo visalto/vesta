@@ -3,15 +3,15 @@ Python Model representation of vesta service.
 Vesta service represent module in vesta repository.
 Example services: vesta-lineage, vesta-git, vesta-airflow etc.
 """
-from pathlib import Path
-import os
-import logging
 import fnmatch
-from typing import List, Union
+import logging
+import os
 from datetime import datetime
-from dotenv import load_dotenv
+from pathlib import Path
+from typing import List, Union
 
 import docker
+from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
 
@@ -64,8 +64,9 @@ class VestaService:
                   f"docker-compose --env-file {self.ENV_FILE.__str__()} up -d"
         if force_build:
             command += ' --build'
+        fail_gracefully = True if self.name == 'vesta-platform-core' else False
         _run_cmd(command, f'{self.name} service started successfully',
-                 f'{self.name} error starting up')
+                 f'{self.name} finished starting up with non zero code', fail_gracefully=fail_gracefully)
 
     def stop(self):
         logger.info(f'Stopping service {self.name}')
@@ -99,6 +100,7 @@ class Vesta:
             'Parameters summary before deployment process begins')
         self.check_or_crete_network()
         logger.info('Deploying platform components...')
+
         for service in self.services:
             service.start(force_build)
         logger.info('All components have been deployed')
@@ -137,32 +139,67 @@ class Vesta:
         return service_list_to_ignore
 
     def scan_service_list(self) -> List[VestaService]:
+        # Get the list of items in the base directory.
         base_dir_list = os.listdir(self.BASE_DIR)
+
+        # Parse the 'vestaignore' file to get the list of patterns to ignore.
         vesta_ignore = self._parse_vestaignore()
+
+        # Set the 'util_services' variable to the UTIL_SERVICES_SUBMODULE value.
         util_services = self.UTIL_SERVICES_SUBMODULE
+
+        # Create an empty list to store the services that will be processed.
         services_list = []
+
+        # Loop through each item in the base directory.
         for root_item in base_dir_list:
+
+            # Check if the current item is the UTIL_SERVICES_SUBMODULE.
             is_util_services = root_item == util_services
+
+            # Create a Path object for the current root item.
             root_item_path: Path = self.BASE_DIR.joinpath(root_item)
+
+            # If the current item is the UTIL_SERVICES_SUBMODULE, process its contents.
             if is_util_services:
+                # Loop through each item in the UTIL_SERVICES_SUBMODULE directory.
                 for util_service in os.listdir(self.BASE_DIR.joinpath(root_item)):
+                    # Create a Path object for the current util_service item.
                     util_service_path: Path = root_item_path.joinpath(
                         util_service)
-                    is_util_service_in_ignore = True in [fnmatch.fnmatch(f'{root_item}/{util_service}', i) for i in
-                                                         vesta_ignore]
+
+                    # Check if the current util_service item matches any pattern in the 'vestaignore' list.
+                    is_util_service_in_ignore = True in [fnmatch.fnmatch(
+                        f'{root_item}/{util_service}', i) for i in vesta_ignore]
+
+                    # If the util_service item is not in the 'vestaignore' list, add it to the services_list.
                     if not is_util_service_in_ignore:
                         services_list.append(util_service_path)
             else:
+                # Check if the current item should be ignored based on an exact match with 'vestaignore'.
                 is_item_in_ignore = root_item in vesta_ignore
+                if root_item == '.DS_Store':
+                    print('')
+
+                # Check if the current item matches any pattern in the 'vestaignore' list.
                 is_glob_pattern_matching = True in [
                     fnmatch.fnmatch(root_item, i) for i in vesta_ignore]
+
+                # If the item is not in the 'vestaignore' list (exact match or pattern match), add it to the services_list.
                 if not is_item_in_ignore and not is_glob_pattern_matching:
                     services_list.append(root_item_path)
+
+        # Create a list of ordered services based on the priority defined in SERVICES_PRIORITY.
         ordered_services = [self.BASE_DIR.joinpath(
             i) for i in self.SERVICES_PRIORITY]
+
+        # Combine the ordered_services list with the services_list, and remove any duplicates.
         services_list = list(set(ordered_services + services_list))
+
+        # Create a list of VestaService objects for each item in the services_list, passing necessary parameters.
         parsed = [VestaService(i, self.BASE_DIR, self.ENV_FILE)
                   for i in services_list]
+
         return parsed
 
     def service(self, service_name: str) -> VestaService:
@@ -189,14 +226,19 @@ if __name__ == '__main__':
 
     platform = Vesta(BASE_DIR)
     print(platform.ENV_FILE)
+    platform.service('vesta-git').start()
+    platform.service('vesta-airflow').start()
+    platform.service('vesta-platform-core').start()
+
     platform.start_services()
-    # vesta_init = platform.service('vesta-ide')
-    # vesta_init.start(force_build=False)
+    platform_web = platform.service('vesta-platform-core')
+    platform_web.start()
+    vesta_airflow = platform.service('vesta-airflow')
+    vesta_airflow.start(force_build=False)
     # # vesta_init.stop()
-    # # git_service = platform.service('vesta-git')
-    # # lineage_service = platform.service('vesta-lineage')
-    # # lineage_service.stop()
-    # # platform_web = platform.service('vesta-platform-core')
-    # # platform_web.start()
-    # # git_service.start()
+
+    lineage_service = platform.service('vesta-lineage')
+    lineage_service.start()
+
+    # git_service.start(force_build=False)
     # print(BASE_DIR)
