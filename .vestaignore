@@ -17,6 +17,7 @@ __platform__
 # visalto client is not part of the
 # docker stack
 visalto-client
+vesta-python
 
 # Service from util that will be
 # started only on-demand
