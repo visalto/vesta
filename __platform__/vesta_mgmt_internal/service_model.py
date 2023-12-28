@@ -228,7 +228,7 @@ if __name__ == '__main__':
     print(platform.ENV_FILE)
 
     platform.service('vesta-git').start()
-    platform.service('vesta-airflow').start(force_build=False)
+    platform.service('vesta-airflow').start(force_build=True)
     platform.service('vesta-platform-core').start()
 
     platform.service('vesta-airflow').start()
