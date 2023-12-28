@@ -81,9 +81,9 @@ class VestaService:
 class Vesta:
     VESTAIGNORE_FILE_NAME = '.vestaignore'
     UTIL_SERVICES_SUBMODULE = 'util-services'
-    SERVICES_PRIORITY = ['vesta-ci-cd', 'vesta-dataset-storage',
-                         'vesta-lineage', 'vesta-airflow',
-                         'vesta-git', 'vesta-platform-core']
+    SERVICES_PRIORITY = ['vesta-airflow',
+                         'vesta-git',
+                         'vesta-platform-core']
 
     def __init__(self, base_dir: Path):
         self.BASE_DIR = base_dir
@@ -226,11 +226,12 @@ if __name__ == '__main__':
 
     platform = Vesta(BASE_DIR)
     print(platform.ENV_FILE)
-    platform.service('vesta-airflow').start(force_build=True)
 
     platform.service('vesta-git').start()
-    platform.service('vesta-airflow').start()
+    platform.service('vesta-airflow').start(force_build=False)
     platform.service('vesta-platform-core').start()
+
+    platform.service('vesta-airflow').start()
 
     platform.start_services()
     platform_web = platform.service('vesta-platform-core')

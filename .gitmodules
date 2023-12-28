@@ -1,30 +1,13 @@
-[submodule "visalto-client"]
-	path = visalto-client
-	url = https://github.com/visalto/visalto-client.git
 [submodule "vesta-platform-core"]
 	path = vesta-platform-core
 	url = https://github.com/visalto/vesta-platform-core.git
 [submodule "vesta-airflow"]
 	path = vesta-airflow
 	url = https://github.com/visalto/vesta-airflow.git
-[submodule "vesta-dataset-storage"]
-	path = vesta-dataset-storage
-	url = https://github.com/visalto/vesta-dataset-storage.git
+
 [submodule "vesta-git"]
 	path = vesta-git
 	url = https://github.com/visalto/vesta-git.git
-[submodule "vesta-ci-cd"]
-	path = vesta-ci-cd
-	url = https://github.com/visalto/vesta-ci-cd.git
-[submodule "vesta-lineage"]
-	path = vesta-lineage
-	url = https://github.com/visalto/vesta-lineage.git
-[submodule "vesta-init"]
-	path = vesta-init
-	url = https://github.com/visalto/vesta-init.git
-[submodule "vesta-ide"]
-	path = vesta-ide
-	url = https://github.com/visalto/vesta-ide.git
 [submodule "vesta-python"]
 	path = vesta-python
 	url = https://github.com/visalto/vesta-python.git
