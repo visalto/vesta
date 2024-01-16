@@ -226,24 +226,6 @@ if __name__ == '__main__':
 
     platform = Vesta(BASE_DIR)
     print(platform.ENV_FILE)
-
+    platform.service('vesta-git').start(force_build=True)
     platform.service('vesta-airflow').start(force_build=True)
-
-    platform.service('vesta-git').start()
-    platform.service('vesta-airflow').start(force_build=True)
-    platform.service('vesta-platform-core').start()
-
-    platform.service('vesta-airflow').start()
-
-    platform.start_services()
-    platform_web = platform.service('vesta-platform-core')
-    platform_web.start()
-    vesta_airflow = platform.service('vesta-airflow')
-    vesta_airflow.start(force_build=False)
-    # # vesta_init.stop()
-
-    lineage_service = platform.service('vesta-lineage')
-    lineage_service.start()
-
-    # git_service.start(force_build=False)
-    # print(BASE_DIR)
+    platform.service('vesta-platform-core').start(force_build=True)
