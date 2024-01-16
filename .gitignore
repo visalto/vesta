@@ -7,7 +7,6 @@
 .idea/
 .idea/cache/
 __pycache__
-
 /__platform__/workspaces/**
 !/__platform__/workspaces/**/*.md
 /__platform__/mnt/**
