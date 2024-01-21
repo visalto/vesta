@@ -18,3 +18,5 @@ __pycache__
 !/__platform__/ide_shared_volume/**/*.md
 
 /.vscode/
+
+letsencrypt
