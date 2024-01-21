@@ -11,6 +11,9 @@ minimal_amount_of_requirements.txt
 env.json
 *.py
 *.md
+# Python Venv
+venv
+
 # __platform__ is meant for platforms operations
 __platform__
 

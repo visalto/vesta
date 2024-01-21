@@ -226,6 +226,13 @@ if __name__ == '__main__':
 
     platform = Vesta(BASE_DIR)
     print(platform.ENV_FILE)
-    platform.service('vesta-git').start(force_build=True)
-    platform.service('vesta-airflow').start(force_build=True)
-    platform.service('vesta-platform-core').start(force_build=True)
+    # platform.service('vesta-git').stop()
+    # platform.service('vesta-airflow').stop()
+    # platform.service('vesta-platform-core').stop()
+
+
+    # platform.service('vesta-git').start(force_build=False)
+    # platform.service('vesta-airflow').start(force_build=False)
+    platform.service('vesta-platform-core').start(force_build=False)
+
+    print('')
