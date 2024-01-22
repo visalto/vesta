@@ -1,5 +1,6 @@
 # Misc root level files
 *.env
+.env.*
 .git
 .gitignore
 .gitmodules
