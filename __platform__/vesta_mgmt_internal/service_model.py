@@ -92,7 +92,7 @@ class Vesta:
 
         if not self.ENV_FILE:
             raise FileNotFoundError(
-                '.env is missing from root Vesta repo. Check this doc for more info')
+                '.env is missing from root Vesta repo')
 
     def start_services(self, force_build: bool = False):
         logger.info('Vesta start signal received..')
@@ -178,8 +178,6 @@ class Vesta:
             else:
                 # Check if the current item should be ignored based on an exact match with 'vestaignore'.
                 is_item_in_ignore = root_item in vesta_ignore
-                if root_item == '.DS_Store':
-                    print('')
 
                 # Check if the current item matches any pattern in the 'vestaignore' list.
                 is_glob_pattern_matching = True in [
@@ -190,15 +188,13 @@ class Vesta:
                     services_list.append(root_item_path)
 
         # Create a list of ordered services based on the priority defined in SERVICES_PRIORITY.
-        ordered_services = [self.BASE_DIR.joinpath(
+        priority_services = [self.BASE_DIR.joinpath(
             i) for i in self.SERVICES_PRIORITY]
-
-        # Combine the ordered_services list with the services_list, and remove any duplicates.
-        services_list = list(set(ordered_services + services_list))
+        ordered_services = priority_services + [s for s in services_list if s not in priority_services]
 
         # Create a list of VestaService objects for each item in the services_list, passing necessary parameters.
         parsed = [VestaService(i, self.BASE_DIR, self.ENV_FILE)
-                  for i in services_list]
+                  for i in ordered_services]
 
         return parsed
 
@@ -226,13 +222,13 @@ if __name__ == '__main__':
 
     platform = Vesta(BASE_DIR)
     print(platform.ENV_FILE)
+    # platform.start_services()
     # platform.service('vesta-git').stop()
     # platform.service('vesta-airflow').stop()
     # platform.service('vesta-platform-core').stop()
 
-
-    platform.service('vesta-git').start(force_build=False)
-    # platform.service('vesta-airflow').start(force_build=False)
+    # platform.service('vesta-git').start(force_build=True)
+    platform.service('vesta-airflow').start(force_build=False)
     # platform.service('vesta-platform-core').start(force_build=False)
     # platform.service('proxy-manager').start(force_build=False)
 
