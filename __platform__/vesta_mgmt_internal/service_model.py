@@ -228,8 +228,8 @@ if __name__ == '__main__':
     # platform.service('vesta-platform-core').stop()
 
     # platform.service('vesta-git').start(force_build=True)
-    platform.service('vesta-airflow').start(force_build=False)
-    # platform.service('vesta-platform-core').start(force_build=False)
+    # platform.service('vesta-airflow').start(force_build=False)
+    platform.service('vesta-platform-core').start(force_build=False)
     # platform.service('proxy-manager').start(force_build=False)
 
     print('')
